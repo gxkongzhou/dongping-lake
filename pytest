@@ -1,0 +1,9 @@
+#_*_ coding:utf-8 _*_
+
+# history: zkz 20180603
+
+import sys,os
+print sys.version
+print os.listdir(".")
+print os.getcwd()
+ 
