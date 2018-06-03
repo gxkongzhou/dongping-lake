@@ -3,7 +3,7 @@
 # history: zkz 20180603
 
 import sys,os
-print sys.version
-print os.listdir(".")
-print os.getcwd()
+print "本机使用的python版本为："+sys.version
+print "目前所在工作目录为："+os.getcwd()
+print "工作目录下的文件有："+os.listdir(".")
  
