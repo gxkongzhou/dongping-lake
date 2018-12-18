@@ -14,6 +14,16 @@ for i in ip:
 ipfirewall = r'/Users/vicent/Documents/ipfirewall'
 tmp = r'/Users/vicent/Documents/tmp'
 fread = open(ipfirewall, mode='r')
+
+
+def inser_rule():
+    global x
+    for x in ip:
+        if not re.findall(r'-s.+x.+-p', srctext):
+            srclist.insert(-23, 'iptables -I INPUT -s\t%s\t-p TCP --dport 8080 -j ACCEPT\n'.format(x))
+    fwrite.writelines(srclist)
+
+
 with open(tmp, mode='w') as fwrite:
     srclist = fread.readlines()
     fread.seek(0, 0)
@@ -21,17 +31,11 @@ with open(tmp, mode='w') as fwrite:
     tody = '#' + str(time.strftime('%Y-%m-%d', time.localtime()) + '\n')
     if tody in srclist:
         # add iptable rule into the file before ACCEPT ALL
-        for x in ip:
-            if not re.findall(r'-s.+x.+-p', srctext):
-                srclist.insert(-23, 'iptables -I INPUT -s\t%s\t-p TCP --dport 8080 -j ACCEPT\n'.format(x))
-        fwrite.writelines(srclist)
+        inser_rule()
     else:
         print 'Add date note'
         srclist.insert(-23, '#' + str(time.strftime('%Y-%m-%d', time.localtime())) + '\n')
-        for x in ip:
-            if not re.findall(r'-s.+x.+-p', srctext):
-                srclist.insert(-23, 'iptables -I INPUT -s\t%s\t-p TCP --dport 8080 -j ACCEPT\n'.format(x))
-        fwrite.writelines(srclist)
+        inser_rule()
 
 fread.close()
 #os.system()
